@@ -156,10 +156,6 @@ func parseExpr(in []byte, enableRegex bool) (Q, int, error) {
 		expr = &Branch{Pattern: text}
 	case tokText, tokRegex:
 		if !enableRegex {
-			for len(text) > 1 && text[0] == '(' && text[len(text)-1] == ')' {
-				text = text[1 : len(text)-1]
-			}
-
 			text = rexp.QuoteMeta(text)
 		}
 		q, err := RegexpQuery(text, false, false)
